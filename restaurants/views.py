@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import Restaurant
-from .forms import RestaurantForm, SignUpForm, LoginForm
+from .forms import RestaurantForm, SignupForm, SigninForm
 from django.contrib.auth import login, authenticate, logout
 
 
 def signup(request):
-    form = SignUpForm()
+    form = SignupForm()
     if request.method == "POST":
-        form = SignUpForm(request.POST)
+        form = SignupForm(request.POST)
         if form.is_valid():
             user_obj=form.save(commit=False)
             user_obj.set_password(user_obj.password)
@@ -20,9 +20,9 @@ def signup(request):
     return render(request, 'signup.html', context)
 
 def signin(request):
-    form = LoginForm()
+    form = SigninForm()
     if request.method == "POST":
-        form = LoginForm(request.POST)
+        form = SigninForm(request.POST)
         if form.is_valid():
             my_username=form.cleaned_data['username']
             my_password=form.cleaned_data['password']
